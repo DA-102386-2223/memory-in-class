@@ -24,32 +24,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.infoButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openWindow();
-            }
-        });
+        findViewById(R.id.infoButton).setOnClickListener(view -> openWindow());
 
         someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
+                result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         if (data != null) doSomeOperationsWithReturnedData(data);
                     }
                 }
-            }
-            );
+        );
 
-        findViewById(R.id.playButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        findViewById(R.id.playButton).setOnClickListener(view -> {
 //                play();
-                playWithResult();
-            }
+            playWithResult();
         });
     }
 

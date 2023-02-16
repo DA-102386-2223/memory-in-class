@@ -26,23 +26,20 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        findViewById(R.id.finishButon).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Define a return Key Value
-                Intent intent = new Intent();
+        findViewById(R.id.finishButon).setOnClickListener(view -> {
+            // Define a return Key Value
+            Intent intent = new Intent();
 
-                // Put the data to return into the extra
-                String reply = "Ha guanyat el jugador 1";
-                intent.putExtra(EXTRA_REPLY, reply);
-                intent.putExtra(EXTRA_REPLY_POINTS, 100);
+            // Put the data to return into the extra
+            String reply = "Ha guanyat el jugador 1";
+            intent.putExtra(EXTRA_REPLY, reply);
+            intent.putExtra(EXTRA_REPLY_POINTS, 100);
 
-                // Set the activity's result to RESULT_OK
-                setResult(RESULT_OK, intent);
+            // Set the activity's result to RESULT_OK
+            setResult(RESULT_OK, intent);
 
-                // Finish the current activity
-                finish();
-            }
+            // Finish the current activity
+            finish();
         });
     }
 }
