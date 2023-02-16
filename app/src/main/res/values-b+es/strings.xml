@@ -3,4 +3,5 @@
     <string name="startGame">Juega!</string>
     <string name="moreInfo">Información</string>
     <string name="Wellcome">Bienvenido al mundo del Memory</string>
+    <string name="surrender">Me Rindo</string>
 </resources>
