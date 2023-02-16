@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 //        Toast.makeText(this, "Ha fet " + points + " punts.", Toast.LENGTH_SHORT).show();
         Log.d("MainActivity", "Informació rebuda: " + info);
         Log.d("MainActivity", "Ha fet " + points + " punts.");
-        Log.banana();
+//        Log.banana(); error done expressament
 
     }
 }
