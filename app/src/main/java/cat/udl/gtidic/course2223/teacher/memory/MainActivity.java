@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -77,7 +78,10 @@ public class MainActivity extends AppCompatActivity {
     private void doSomeOperationsWithReturnedData(Intent data){
         String info = data.getStringExtra(GameActivity.EXTRA_REPLY);
         int points = data.getIntExtra(GameActivity.EXTRA_REPLY_POINTS, -1);
-        Toast.makeText(this, "Informació rebuda: " + info, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Ha fet " + points + " punts.", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Informació rebuda: " + info, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Ha fet " + points + " punts.", Toast.LENGTH_SHORT).show();
+        Log.d("MainActivity", "Informació rebuda: " + info);
+        Log.d("MainActivity", "Ha fet " + points + " punts.");
+
     }
 }
