@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import cat.udl.gtidic.course2223.teacher.memory.Helpers.AppCompatActivityPlus;
+
+public class MainActivity extends AppCompatActivityPlus {
 
     // class property
     ActivityResultLauncher<Intent> someActivityResultLauncher;
