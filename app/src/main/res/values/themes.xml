@@ -13,4 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.Memory.SplashScreen" parent="Theme.Memory">
+        <!-- Real theme config in values-v31 -->
+    </style>
 </resources>
