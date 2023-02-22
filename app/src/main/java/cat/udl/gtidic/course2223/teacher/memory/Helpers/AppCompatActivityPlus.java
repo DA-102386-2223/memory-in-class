@@ -42,6 +42,12 @@ public class AppCompatActivityPlus extends AppCompatActivity {
         notifyState("onStop");
     }
 
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        notifyState("onDestroy");
+    }
+
     private void notifyState(String state){
         String message = state + " state";
         if (logStates) Log.d(this.myClassTag, message);
