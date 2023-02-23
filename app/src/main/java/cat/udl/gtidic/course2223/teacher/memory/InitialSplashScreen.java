@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
+import cat.udl.gtidic.course2223.teacher.memory.Helpers.GlobalInfo;
+
 public class InitialSplashScreen extends AppCompatActivity {
 
     @Override
@@ -24,7 +26,7 @@ public class InitialSplashScreen extends AppCompatActivity {
 
         // do heavy load things here
         // example case wait for N seconds and end this activity
-        new Handler().postDelayed(() -> endActivity(), 5000);   //5 seconds
+        new Handler().postDelayed(() -> endActivity(), GlobalInfo.SPLASH_SCREEN_TIMEOUT);   //5 seconds
     }
 
     private void endActivity(){
