@@ -1,18 +1,13 @@
 package cat.udl.gtidic.course2223.teacher.memory;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import cat.udl.gtidic.course2223.teacher.memory.Helpers.AppCompatActivityPlus;
 
@@ -39,8 +34,9 @@ public class MainActivity extends AppCompatActivityPlus {
         );
 
         findViewById(R.id.playButton).setOnClickListener(view -> {
-//                play();
-            playWithResult();
+//          play();
+//          playWithResult();
+            playInitial();
         });
     }
 
@@ -52,18 +48,24 @@ public class MainActivity extends AppCompatActivityPlus {
         startActivity(i);
     }
 
-    /** Open the new activity game
-     */
+    /** Open the new activity game */
     private void play(){
         Intent i = new Intent(this, GameActivity.class);
         i.putExtra("nomDelJugador1", "Albert");
         startActivity(i);
     }
 
+    /** Open the new activity game v2 */
     private void playWithResult(){
         Intent i = new Intent(this, GameActivity.class);
         i.putExtra("nomDelJugador1", "Albert");
         someActivityResultLauncher.launch(i);
+    }
+
+    /** Open the new activity game v3 */
+    private void playInitial(){
+        Intent i = new Intent(this, GameActivity.class);
+        startActivity(i);
     }
 
     private void doSomeOperationsWithReturnedData(Intent data){
