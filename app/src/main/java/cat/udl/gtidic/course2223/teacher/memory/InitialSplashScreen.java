@@ -26,7 +26,7 @@ public class InitialSplashScreen extends AppCompatActivity {
 
         // do heavy load things here
         // example case wait for N seconds and end this activity
-        new Handler().postDelayed(() -> endActivity(), GlobalInfo.SPLASH_SCREEN_TIMEOUT);   //5 seconds
+        new Handler().postDelayed(() -> endActivity(), GlobalInfo.getIntance().getSplashScreenTimeout());   //5 seconds
     }
 
     private void endActivity(){
