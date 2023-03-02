@@ -1,23 +1,24 @@
 package cat.udl.gtidic.course2223.teacher.memory;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import cat.udl.gtidic.course2223.teacher.memory.Helpers.AppCompatActivityPlus;
-import cat.udl.gtidic.course2223.teacher.memory.Models.Game;
+import cat.udl.gtidic.course2223.teacher.memory.databinding.ActivityGameBinding;
+import cat.udl.gtidic.course2223.teacher.memory.viewmodels.GameViewModel;
 
 public class GameActivity extends AppCompatActivityPlus {
     public static final String EXTRA_REPLY = "returnKey"; // Create an intent
     public static final String EXTRA_REPLY_POINTS = "keyPoints"; // Create an intent
 
 //    TODO it should be created using a desing pattern like MVVM
-    private Game internalGame = new Game();
+    private GameViewModel game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,10 @@ public class GameActivity extends AppCompatActivityPlus {
             }
         }
 
-        internalGame.init();
+        game = new ViewModelProvider(this).get(GameViewModel.class);
+        ActivityGameBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_game);
+        binding.setGameViewModel(game);
+        binding.setLifecycleOwner(this);
 
         findViewById(R.id.finishButon).setOnClickListener(view -> {
             // Define a return Key Value
@@ -80,6 +84,6 @@ public class GameActivity extends AppCompatActivityPlus {
 
     private void buttonClicked(View view, int row, int column){
         Log.d(myClassTag, "button clicked. Row: " + row + ". Column: " + column);
-        internalGame.cardClicked((Button) view, row, column);
+        game.cardClicked(view, row, column);
     }
 }
