@@ -1,4 +1,4 @@
-package cat.udl.gtidic.course2223.teacher.memory;
+package cat.udl.gtidic.course2223.teacher.memory.views;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import cat.udl.gtidic.course2223.teacher.memory.Helpers.AppCompatActivityPlus;
+import cat.udl.gtidic.course2223.teacher.memory.R;
+import cat.udl.gtidic.course2223.teacher.memory.views.GameActivity;
 
 public class MainActivity extends AppCompatActivityPlus {
 

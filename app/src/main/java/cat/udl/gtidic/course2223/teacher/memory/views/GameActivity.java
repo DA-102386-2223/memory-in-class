@@ -1,4 +1,4 @@
-package cat.udl.gtidic.course2223.teacher.memory;
+package cat.udl.gtidic.course2223.teacher.memory.views;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import cat.udl.gtidic.course2223.teacher.memory.Helpers.AppCompatActivityPlus;
+import cat.udl.gtidic.course2223.teacher.memory.R;
 import cat.udl.gtidic.course2223.teacher.memory.databinding.ActivityGameBinding;
 import cat.udl.gtidic.course2223.teacher.memory.viewmodels.GameViewModel;
 

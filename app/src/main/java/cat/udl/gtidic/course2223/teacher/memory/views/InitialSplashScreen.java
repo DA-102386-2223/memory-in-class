@@ -1,4 +1,4 @@
-package cat.udl.gtidic.course2223.teacher.memory;
+package cat.udl.gtidic.course2223.teacher.memory.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import cat.udl.gtidic.course2223.teacher.memory.Helpers.GlobalInfo;
+import cat.udl.gtidic.course2223.teacher.memory.R;
 
 public class InitialSplashScreen extends AppCompatActivity {
 
