@@ -55,8 +55,8 @@ public class Board {
 
             intPositionValues = r.nextInt(internalPossibleValues.size());
             String value = internalPossibleValues.get(intPositionValues);
-            piece1.value = value;
-            piece2.value = value;
+            piece1.setValue(value);
+            piece2.setValue(value);
             internalPossibleValues.remove(intPositionValues);
 
             Log.d(myClassTag, "Assigned value: " + value + " to pieces: " + piece1 + " " + piece2 );

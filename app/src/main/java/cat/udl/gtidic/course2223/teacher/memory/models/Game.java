@@ -20,6 +20,9 @@ public class Game {
     private Player currentPlayer;
     private Player winner = null;
 
+    Piece piece1Selected;
+    Piece piece2Selected;
+
     Board board;
     public void init(){
 //        TODO Board size will be dinamic in the future
@@ -36,16 +39,67 @@ public class Game {
         currentPlayer = player1;
     }
 
+    /**
+     * fa el canvi de turn entre els jugadors
+     * Cal cridar-la només quan es compleixin les condicions per canviar de torn
+     */
+    private void changeTurn(){
+        currentPlayer = currentPlayer == player1 ? player2 : player1;
+        Log.d(myClassTag, "He canviat de turn, ara li toca al jugador " + currentPlayer.getName());
+    }
+
     public Player getCurrentPlayer(){ return currentPlayer; }
 
     public void cardClicked(Button button, int row, int column){
         Piece p = board.getPiece(row, column);
-        button.setText(p.value);
+        button.setText(p.getValue());
         totalCardsReversed++;
         Log.d(myClassTag, "He incrementat totalCardsRevers");
 
-//        TODO tmp changing tour every click
-        currentPlayer = currentPlayer == player1 ? player2 : player1;
+        // assignant la piece clicada a la piece corresponent
+        if (piece1Selected == null) piece1Selected = p;
+        else if (piece2Selected == null) piece2Selected = p;
+        else Log.d(myClassTag, "Unexpected case, please check");
+
+//        logging current selected cards
+        if (piece1Selected != null) Log.d(myClassTag, "Card 1: " + piece1Selected.getValue());
+        else Log.d(myClassTag, "Card 1 not selected");
+        if (piece2Selected != null) Log.d(myClassTag, "Card 1: " + piece2Selected.getValue());
+        else Log.d(myClassTag, "Card 2 not selected");
+
+        checkMatch();
+        recoverRound();
+    }
+
+
+    /**
+     * Revisa si en aquesta Round les 2 cartes seleccionades son iguals (match)
+     */
+    private void checkMatch() {
+        if (piece1Selected != null && piece2Selected != null && ! piece1Selected.getValue().equals(piece2Selected.getValue())) {
+            // TODO add points to player
+            setCurrentPiecesAsMatched();
+            changeTurn();
+        }
+    }
+
+    /**
+     * Assigna les 2 peces que actualment estan seleccionades com que ja han fet match
+     * Això farà que no siguin seleccionables
+     */
+    private void setCurrentPiecesAsMatched(){
+        piece1Selected.setAlreadyMatched(true);
+        piece2Selected.setAlreadyMatched(true);
+    }
+
+    /**
+     * torna a inicialitzar la ronda de selecció de cartes
+     */
+    private void recoverRound(){
+        if (piece1Selected != null && piece2Selected != null){
+            piece1Selected = null;
+            piece2Selected = null;
+        }
     }
 
     public int getTotalCardsReversed() {
