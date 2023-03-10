@@ -1,4 +1,4 @@
-package cat.udl.gtidic.course2223.teacher.memory.Models;
+package cat.udl.gtidic.course2223.teacher.memory.models;
 
 import android.util.Log;
 

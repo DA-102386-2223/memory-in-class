@@ -1,13 +1,12 @@
-package cat.udl.gtidic.course2223.teacher.memory.Models;
+package cat.udl.gtidic.course2223.teacher.memory.models;
 
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import java.util.Arrays;
 import java.util.List;
 
-import cat.udl.gtidic.course2223.teacher.memory.Models.Player.Player;
+import cat.udl.gtidic.course2223.teacher.memory.models.Player.Player;
 
 public class Game {
     protected String myClassTag = this.getClass().getSimpleName();
