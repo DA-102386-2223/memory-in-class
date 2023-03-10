@@ -1,4 +1,4 @@
-package cat.udl.gtidic.course2223.teacher.memory.Helpers;
+package cat.udl.gtidic.course2223.teacher.memory.helpers;
 
 public class GlobalInfo {
     private final int SPLASH_SCREEN_TIMEOUT = 500;

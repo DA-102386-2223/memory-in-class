@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import cat.udl.gtidic.course2223.teacher.memory.Helpers.AppCompatActivityPlus;
+import cat.udl.gtidic.course2223.teacher.memory.helpers.AppCompatActivityPlus;
 import cat.udl.gtidic.course2223.teacher.memory.R;
 import cat.udl.gtidic.course2223.teacher.memory.databinding.ActivityGameBinding;
 import cat.udl.gtidic.course2223.teacher.memory.viewmodels.GameViewModel;

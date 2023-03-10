@@ -1,4 +1,4 @@
-package cat.udl.gtidic.course2223.teacher.memory.Helpers;
+package cat.udl.gtidic.course2223.teacher.memory.helpers;
 
 import android.os.Bundle;
 import android.util.Log;
