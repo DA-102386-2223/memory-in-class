@@ -6,4 +6,5 @@
     <string name="surrender">Em Rendeixo</string>
     <string name="boringMessage">Missatge avorrit per l\'splashScreen API versions less than 31</string>
     <string name="totalCardsReversed">Total Cards Reversed:</string>
+    <string name="currentPlayer">Current Player:</string>
 </resources>

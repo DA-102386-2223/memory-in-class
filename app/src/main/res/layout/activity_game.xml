@@ -192,5 +192,24 @@
             app:layout_constraintStart_toEndOf="@+id/tvTotalCardReversedLabel"
             app:layout_constraintTop_toTopOf="@+id/tvTotalCardReversedLabel" />
 
+        <TextView
+            android:id="@+id/tvCurrentPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="@string/currentPlayer"
+            app:layout_constraintStart_toStartOf="@+id/tvTotalCardReversedLabel"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotalCardReversedLabel" />
+
+        <TextView
+            android:id="@+id/tvCurrentPlayerValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Albert"
+            android:text="@{gameViewModel.game.currentPlayer.name}"
+            app:layout_constraintStart_toStartOf="@+id/tvTotalCardsReversedValue"
+            app:layout_constraintTop_toTopOf="@+id/tvCurrentPlayer" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
