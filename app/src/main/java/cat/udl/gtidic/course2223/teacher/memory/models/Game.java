@@ -99,7 +99,8 @@ public class Game {
 
                 // check winner
                 if (board.isFull()){
-                    winner = currentPlayer;
+                    winner = player1.getPoints() > player2.getPoints() ? player1 : player2;
+                    maxPoints = winner.getPoints();
                     Log.d(myClassTag, "El winner is: " + winner.getName());
                 }
 
