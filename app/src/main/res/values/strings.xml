@@ -5,6 +5,7 @@
     <string name="Wellcome">Benvingut al món del Memory</string>
     <string name="surrender">Em Rendeixo</string>
     <string name="boringMessage">Missatge avorrit per l\'splashScreen API versions less than 31</string>
-    <string name="totalCardsReversed">Total Cards Reversed:</string>
-    <string name="currentPlayer">Current Player:</string>
+    <string name="totalCardsReversed">Total Tarjetes Girades:</string>
+    <string name="currentPlayer">Jugador actual:</string>
+    <string name="points">Punts:</string>
 </resources>

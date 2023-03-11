@@ -12,6 +12,7 @@ import cat.udl.gtidic.course2223.teacher.memory.models.Player.Player;
 public class Game {
     protected String myClassTag = this.getClass().getSimpleName();
 
+    final int POINTS_PER_MATCH = 10;
     int maxPoints = -1;
     private int totalCardsReversed = 0;
 
@@ -67,20 +68,37 @@ public class Game {
         if (piece2Selected != null) Log.d(myClassTag, "Card 1: " + piece2Selected.getValue());
         else Log.d(myClassTag, "Card 2 not selected");
 
-        checkMatch();
+        checkRoundEnded();
         recoverRound();
     }
 
 
     /**
-     * Revisa si en aquesta Round les 2 cartes seleccionades son iguals (match)
+     * Revisa si en aquesta Round s'ha acabat i aplica les accions corresponents
      */
-    private void checkMatch() {
-        if (piece1Selected != null && piece2Selected != null && ! piece1Selected.getValue().equals(piece2Selected.getValue())) {
-            // TODO add points to player
-            setCurrentPiecesAsMatched();
-            changeTurn();
+    private void checkRoundEnded() {
+        if (piece1Selected != null && piece2Selected != null){
+            Log.d(myClassTag, "Fi de ronda");
+
+//            revisa si match
+            if (piece1Selected.getValue().equals(piece2Selected.getValue())){
+                setMatch();
+            }else{
+//            canvia de torn
+                changeTurn();
+            }
+
+            recoverRound();
         }
+    }
+
+    /**
+     * Aplica les accions en cas de match entre cartes
+     */
+    private void setMatch(){
+        Log.d(myClassTag, "Match realitzat i comptant punts");
+        currentPlayer.addPoints(POINTS_PER_MATCH);
+        setCurrentPiecesAsMatched();
     }
 
     /**
