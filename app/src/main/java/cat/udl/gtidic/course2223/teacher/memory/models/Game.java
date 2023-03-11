@@ -24,6 +24,10 @@ public class Game {
     Piece piece1Selected;
     Piece piece2Selected;
 
+//    while is not mvvm I save the buttons -> TODO change to MVVM model buttons
+    Button button1Selected;
+    Button button2Selected;
+
     Board board;
     public void init(){
 //        TODO Board size will be dinamic in the future
@@ -62,6 +66,12 @@ public class Game {
         else if (piece2Selected == null) piece2Selected = p;
         else Log.d(myClassTag, "Unexpected case, please check");
 
+        // TODO temp while not using MVVM in buttons
+        if (button1Selected == null) button1Selected = button;
+        else if (button2Selected == null) button2Selected = button;
+        else Log.d(myClassTag, "Unexpected case, please check");
+        button.setEnabled(false);
+
 //        logging current selected cards
         if (piece1Selected != null) Log.d(myClassTag, "Card 1: " + piece1Selected.getValue());
         else Log.d(myClassTag, "Card 1 not selected");
@@ -69,26 +79,28 @@ public class Game {
         else Log.d(myClassTag, "Card 2 not selected");
 
         checkRoundEnded();
-        recoverRound();
     }
 
 
     /**
-     * Revisa si en aquesta Round s'ha acabat i aplica les accions corresponents
+     * Revisa si en aquesta Round s'ha acabat i aplica les accions corresponents al canvi de ronda
      */
     private void checkRoundEnded() {
-        if (piece1Selected != null && piece2Selected != null){
+        if (piece1Selected != null && piece2Selected != null) {
             Log.d(myClassTag, "Fi de ronda");
 
-//            revisa si match
-            if (piece1Selected.getValue().equals(piece2Selected.getValue())){
+            // TODO aquesta variable es innecessària quan els botons siguin MVVM
+            boolean isMatch = false;
+
+            if (piece1Selected.getValue().equals(piece2Selected.getValue())) {
+                // revisa si match
+                isMatch = true;
                 setMatch();
-            }else{
-//            canvia de torn
+            } else {
+                // canvia de torn
                 changeTurn();
             }
-
-            recoverRound();
+            recoverRound(isMatch);
         }
     }
 
@@ -108,15 +120,29 @@ public class Game {
     private void setCurrentPiecesAsMatched(){
         piece1Selected.setAlreadyMatched(true);
         piece2Selected.setAlreadyMatched(true);
+
+        // tmp while not mvvm
+        button1Selected.setEnabled(false);
+        button2Selected.setEnabled(false);
     }
 
     /**
      * torna a inicialitzar la ronda de selecció de cartes
      */
-    private void recoverRound(){
+    private void recoverRound(boolean isMatch){
         if (piece1Selected != null && piece2Selected != null){
             piece1Selected = null;
             piece2Selected = null;
+
+            if (!isMatch) {
+                button1Selected.setText("");
+                button2Selected.setText("");
+                button1Selected.setEnabled(true);
+                button2Selected.setEnabled(true);
+            }
+
+            button1Selected = null;
+            button2Selected = null;
         }
     }
 
