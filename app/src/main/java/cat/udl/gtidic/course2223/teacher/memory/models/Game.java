@@ -92,14 +92,22 @@ public class Game {
             // TODO aquesta variable es innecessària quan els botons siguin MVVM
             boolean isMatch = false;
 
-            if (piece1Selected.getValue().equals(piece2Selected.getValue())) {
+            if (piece1Selected.getValue().equals(piece2Selected.getValue())){
                 // revisa si match
                 isMatch = true;
                 setMatch();
+
+                // check winner
+                if (board.isFull()){
+                    winner = currentPlayer;
+                    Log.d(myClassTag, "El winner is: " + winner.getName());
+                }
+
             } else {
                 // canvia de torn
                 changeTurn();
             }
+
             recoverRound(isMatch);
         }
     }

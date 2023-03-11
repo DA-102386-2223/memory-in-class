@@ -61,6 +61,15 @@ public class Board {
 
             Log.d(myClassTag, "Assigned value: " + value + " to pieces: " + piece1 + " " + piece2 );
         }
+
+        Log.d(myClassTag, "Pintant l'assignació realitzada");
+        for (int i = 0; i<size; i++){
+            String line = "| ";
+            for (int j = 0; j<size; j++){
+                line += board[i][j].getValue() + " | ";
+            }
+            Log.d(myClassTag, line);
+        }
     }
 
     public boolean isCellEmpty(int row, int col){
@@ -68,9 +77,17 @@ public class Board {
         return true;
     }
 
+    /**
+     * Revisa si totes les cartes del Board han estat girades
+     * @return boolean
+     */
     public boolean isFull(){
-        // TOOD pending
-        return false;
+        for (int i = 0; i<size; i++){
+            for (int j = 0; j<size; j++){
+                if (!board[i][j].isAlreadyMatched()) return false;
+            }
+        }
+        return true;
     }
 
     public Piece getPiece(int row, int column){

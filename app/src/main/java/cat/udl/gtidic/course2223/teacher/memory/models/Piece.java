@@ -19,4 +19,8 @@ public class Piece {
     public void setAlreadyMatched(boolean alreadyMatched) {
         this.alreadyMatched = alreadyMatched;
     }
+
+    public boolean isAlreadyMatched() {
+        return alreadyMatched;
+    }
 }
