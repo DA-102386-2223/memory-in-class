@@ -58,6 +58,9 @@ public class GameActivity extends AppCompatActivityPlus {
         });
 
         createListenersForButtons();
+
+        game.setContext(this.getApplicationContext());
+        game.saveGameIntoDB();
     }
 
     private void createListenersForButtons(){

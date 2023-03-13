@@ -1,34 +1,56 @@
-package cat.udl.gtidic.course2223.teacher.memory.models;
+package cat.udl.gtidic.course2223.teacher.memory.models.Game;
 
 import android.util.Log;
 import android.widget.Button;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.Arrays;
 import java.util.List;
 
+import cat.udl.gtidic.course2223.teacher.memory.models.Board;
+import cat.udl.gtidic.course2223.teacher.memory.models.Piece;
 import cat.udl.gtidic.course2223.teacher.memory.models.Player.HumanPlayer;
 import cat.udl.gtidic.course2223.teacher.memory.models.Player.Player;
 
+@Entity
 public class Game {
+    @Ignore
     protected String myClassTag = this.getClass().getSimpleName();
 
-    final int POINTS_PER_MATCH = 10;
-    int maxPoints = -1;
-    private int totalCardsReversed = 0;
+    @PrimaryKey(autoGenerate = true)
+    public long id;
 
+    protected int POINTS_PER_MATCH = 10;
+    protected int maxPoints = -1;
+    protected int totalCardsReversed = 0;
+
+    @Ignore
     private Player player1;
+    @Ignore
     private Player player2;
+    @Ignore
     private Player currentPlayer;
+    @Ignore
     private Player winner = null;
 
+    @Ignore
     Piece piece1Selected;
+
+    @Ignore
     Piece piece2Selected;
 
 //    while is not mvvm I save the buttons -> TODO change to MVVM model buttons
+    @Ignore
     Button button1Selected;
+    @Ignore
     Button button2Selected;
 
+    @Ignore
     Board board;
+
     public void init(){
 //        TODO Board size will be dinamic in the future
         int boardSize = 4;
