@@ -2,6 +2,7 @@ package cat.udl.gtidic.course2223.teacher.memory.views;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.room.Room;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.util.Log;
 
 import cat.udl.gtidic.course2223.teacher.memory.helpers.AppCompatActivityPlus;
 import cat.udl.gtidic.course2223.teacher.memory.R;
+import cat.udl.gtidic.course2223.teacher.memory.models.MemoryDatabase;
 
 public class MainActivity extends AppCompatActivityPlus {
 
@@ -39,6 +41,15 @@ public class MainActivity extends AppCompatActivityPlus {
 //          playWithResult();
             playInitial();
         });
+
+        findViewById(R.id.clearButton).setOnClickListener(view -> clearDB());
+    }
+
+    private void clearDB() {
+        String dbName = "memory.db";
+        MemoryDatabase dbRoom = Room.databaseBuilder(this.getApplicationContext(), MemoryDatabase.class, dbName).allowMainThreadQueries().build();
+        dbRoom.gameDAO().deleteAll();
+        dbRoom.close();
     }
 
     /*  Open a new chrome browser webpage

@@ -8,4 +8,5 @@
     <string name="totalCardsReversed">Total Tarjetes Girades:</string>
     <string name="currentPlayer">Jugador actual:</string>
     <string name="points">Punts:</string>
+    <string name="CleanDB">Netejar DB</string>
 </resources>
