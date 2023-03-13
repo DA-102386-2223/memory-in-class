@@ -4,13 +4,17 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
 @Dao
 public interface GameDAO {
     @Insert
-    void insertAll(Game... games);
+    long[] insertAll(Game... games);
+
+    @Insert
+    long insert(Game game);
 
     @Query("SELECT * FROM game")
     List<Game> getAll();
@@ -29,4 +33,6 @@ public interface GameDAO {
     @Query("SELECT maxPoints from Game order by id desc LIMIT 1")
     int getLastGamePoints();
 
+    @Update
+    void update(Game game);
 }
