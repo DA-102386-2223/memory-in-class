@@ -22,6 +22,11 @@ public interface GameDAO {
     void deleteAll();
 
     // max Points
+    @Query("SELECT max(maxPoints) FROM GAME")
+    int getMaxPoints();
+
     // last game
+    @Query("SELECT maxPoints from Game order by id desc LIMIT 1")
+    int getLastGamePoints();
 
 }

@@ -9,4 +9,5 @@
     <string name="currentPlayer">Jugador actual:</string>
     <string name="points">Puntos:</string>
     <string name="CleanDB">Limpiar DB</string>
+    <string name="ReadPoints">Dame info puntos</string>
 </resources>

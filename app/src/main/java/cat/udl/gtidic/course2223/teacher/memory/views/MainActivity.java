@@ -43,12 +43,23 @@ public class MainActivity extends AppCompatActivityPlus {
         });
 
         findViewById(R.id.clearButton).setOnClickListener(view -> clearDB());
+        findViewById(R.id.readDBButton).setOnClickListener(view -> getPoints());
     }
 
     private void clearDB() {
         String dbName = "memory.db";
         MemoryDatabase dbRoom = Room.databaseBuilder(this.getApplicationContext(), MemoryDatabase.class, dbName).allowMainThreadQueries().build();
         dbRoom.gameDAO().deleteAll();
+        dbRoom.close();
+    }
+
+    private void getPoints() {
+        String dbName = "memory.db";
+        MemoryDatabase dbRoom = Room.databaseBuilder(this.getApplicationContext(), MemoryDatabase.class, dbName).allowMainThreadQueries().build();
+        int lastPoints = dbRoom.gameDAO().getLastGamePoints();
+        int maxPoints = dbRoom.gameDAO().getMaxPoints();
+        String missatge = String.format("Max punts: %d. Ultims punts: %d", maxPoints, lastPoints );
+        Log.d(myClassTag, missatge );
         dbRoom.close();
     }
 
