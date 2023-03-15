@@ -1,6 +1,6 @@
 package cat.udl.gtidic.course2223.teacher.memory.models;
 
-public class Piece {
+public class Card {
     private String value;
     private boolean alreadyMatched = false;
 
@@ -13,7 +13,7 @@ public class Piece {
 
     @Override
     public String toString(){
-        return "Peça amb valor: " + value;
+        return "Card amb valor: " + value;
     }
 
     public void setAlreadyMatched(boolean alreadyMatched) {

@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cat.udl.gtidic.course2223.teacher.memory.models.Board;
-import cat.udl.gtidic.course2223.teacher.memory.models.Piece;
+import cat.udl.gtidic.course2223.teacher.memory.models.Card;
 import cat.udl.gtidic.course2223.teacher.memory.models.Player.HumanPlayer;
 import cat.udl.gtidic.course2223.teacher.memory.models.Player.Player;
 
@@ -37,10 +37,10 @@ public class Game {
     private Player winner = null;
 
     @Ignore
-    Piece piece1Selected;
+    Card card1Selected;
 
     @Ignore
-    Piece piece2Selected;
+    Card card2Selected;
 
 //    while is not mvvm I save the buttons -> TODO change to MVVM model buttons
     @Ignore
@@ -78,14 +78,14 @@ public class Game {
     public Player getCurrentPlayer(){ return currentPlayer; }
 
     public void cardClicked(Button button, int row, int column){
-        Piece p = board.getPiece(row, column);
+        Card p = board.getPiece(row, column);
         button.setText(p.getValue());
         totalCardsReversed++;
         Log.d(myClassTag, "He incrementat totalCardsRevers");
 
         // assignant la piece clicada a la piece corresponent
-        if (piece1Selected == null) piece1Selected = p;
-        else if (piece2Selected == null) piece2Selected = p;
+        if (card1Selected == null) card1Selected = p;
+        else if (card2Selected == null) card2Selected = p;
         else Log.d(myClassTag, "Unexpected case, please check");
 
         // TODO temp while not using MVVM in buttons
@@ -95,9 +95,9 @@ public class Game {
         button.setEnabled(false);
 
 //        logging current selected cards
-        if (piece1Selected != null) Log.d(myClassTag, "Card 1: " + piece1Selected.getValue());
+        if (card1Selected != null) Log.d(myClassTag, "Card 1: " + card1Selected.getValue());
         else Log.d(myClassTag, "Card 1 not selected");
-        if (piece2Selected != null) Log.d(myClassTag, "Card 1: " + piece2Selected.getValue());
+        if (card2Selected != null) Log.d(myClassTag, "Card 1: " + card2Selected.getValue());
         else Log.d(myClassTag, "Card 2 not selected");
 
         checkRoundEnded();
@@ -108,13 +108,13 @@ public class Game {
      * Revisa si en aquesta Round s'ha acabat i aplica les accions corresponents al canvi de ronda
      */
     private void checkRoundEnded() {
-        if (piece1Selected != null && piece2Selected != null) {
+        if (card1Selected != null && card2Selected != null) {
             Log.d(myClassTag, "Fi de ronda");
 
             // TODO aquesta variable es innecessària quan els botons siguin MVVM
             boolean isMatch = false;
 
-            if (piece1Selected.getValue().equals(piece2Selected.getValue())){
+            if (card1Selected.getValue().equals(card2Selected.getValue())){
                 // revisa si match
                 isMatch = true;
                 setMatch();
@@ -149,8 +149,8 @@ public class Game {
      * Això farà que no siguin seleccionables
      */
     private void setCurrentPiecesAsMatched(){
-        piece1Selected.setAlreadyMatched(true);
-        piece2Selected.setAlreadyMatched(true);
+        card1Selected.setAlreadyMatched(true);
+        card2Selected.setAlreadyMatched(true);
 
         // tmp while not mvvm
         button1Selected.setEnabled(false);
@@ -161,9 +161,9 @@ public class Game {
      * torna a inicialitzar la ronda de selecció de cartes
      */
     private void recoverRound(boolean isMatch){
-        if (piece1Selected != null && piece2Selected != null){
-            piece1Selected = null;
-            piece2Selected = null;
+        if (card1Selected != null && card2Selected != null){
+            card1Selected = null;
+            card2Selected = null;
 
             if (!isMatch) {
                 button1Selected.setText("");
