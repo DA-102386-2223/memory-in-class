@@ -57,37 +57,7 @@ public class GameActivity extends AppCompatActivityPlus {
             finish();
         });
 
-        createListenersForButtons();
-
         game.setContext(this.getApplicationContext());
         game.saveGameIntoDB();
-    }
-
-    private void createListenersForButtons(){
-//      TODO it have to be improved in the future! -> creating buttons dynamically ;)
-        findViewById(R.id.button00).setOnClickListener(view -> buttonClicked(view, 0, 0));
-        findViewById(R.id.button01).setOnClickListener(view -> buttonClicked(view, 0, 1));
-        findViewById(R.id.button02).setOnClickListener(view -> buttonClicked(view, 0, 2));
-        findViewById(R.id.button03).setOnClickListener(view -> buttonClicked(view, 0, 3));
-
-        findViewById(R.id.button10).setOnClickListener(view -> buttonClicked(view, 1, 0));
-        findViewById(R.id.button11).setOnClickListener(view -> buttonClicked(view, 1, 1));
-        findViewById(R.id.button12).setOnClickListener(view -> buttonClicked(view, 1, 2));
-        findViewById(R.id.button13).setOnClickListener(view -> buttonClicked(view, 1, 3));
-
-        findViewById(R.id.button20).setOnClickListener(view -> buttonClicked(view, 2, 0));
-        findViewById(R.id.button21).setOnClickListener(view -> buttonClicked(view, 2, 1));
-        findViewById(R.id.button22).setOnClickListener(view -> buttonClicked(view, 2, 2));
-        findViewById(R.id.button23).setOnClickListener(view -> buttonClicked(view, 2, 3));
-
-        findViewById(R.id.button30).setOnClickListener(view -> buttonClicked(view, 3, 0));
-        findViewById(R.id.button31).setOnClickListener(view -> buttonClicked(view, 3, 1));
-        findViewById(R.id.button32).setOnClickListener(view -> buttonClicked(view, 3, 2));
-        findViewById(R.id.button33).setOnClickListener(view -> buttonClicked(view, 3, 3));
-    }
-
-    private void buttonClicked(View view, int row, int column){
-        Log.d(myClassTag, "button clicked. Row: " + row + ". Column: " + column);
-        game.cardClicked(view, row, column);
     }
 }

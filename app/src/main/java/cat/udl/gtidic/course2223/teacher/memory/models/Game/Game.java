@@ -1,7 +1,6 @@
 package cat.udl.gtidic.course2223.teacher.memory.models.Game;
 
 import android.util.Log;
-import android.widget.Button;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -42,12 +41,6 @@ public class Game {
     @Ignore
     Card card2Selected;
 
-//    while is not mvvm I save the buttons -> TODO change to MVVM model buttons
-    @Ignore
-    Button button1Selected;
-    @Ignore
-    Button button2Selected;
-
     @Ignore
     Board board;
 
@@ -77,22 +70,16 @@ public class Game {
 
     public Player getCurrentPlayer(){ return currentPlayer; }
 
-    public void cardClicked(Button button, int row, int column){
-        Card p = board.getPiece(row, column);
-        button.setText(p.getValue());
+    public void cardClickedMVVM(int row, int column){
+        Card p = board.getCard(row, column);
         totalCardsReversed++;
         Log.d(myClassTag, "He incrementat totalCardsRevers");
+        p.setVisible(true);
 
         // assignant la piece clicada a la piece corresponent
         if (card1Selected == null) card1Selected = p;
         else if (card2Selected == null) card2Selected = p;
         else Log.d(myClassTag, "Unexpected case, please check");
-
-        // TODO temp while not using MVVM in buttons
-        if (button1Selected == null) button1Selected = button;
-        else if (button2Selected == null) button2Selected = button;
-        else Log.d(myClassTag, "Unexpected case, please check");
-        button.setEnabled(false);
 
 //        logging current selected cards
         if (card1Selected != null) Log.d(myClassTag, "Card 1: " + card1Selected.getValue());
@@ -151,10 +138,6 @@ public class Game {
     private void setCurrentPiecesAsMatched(){
         card1Selected.setAlreadyMatched(true);
         card2Selected.setAlreadyMatched(true);
-
-        // tmp while not mvvm
-        button1Selected.setEnabled(false);
-        button2Selected.setEnabled(false);
     }
 
     /**
@@ -162,19 +145,15 @@ public class Game {
      */
     private void recoverRound(boolean isMatch){
         if (card1Selected != null && card2Selected != null){
+            card1Selected.setVisible(false);
+            card2Selected.setVisible(false);
             card1Selected = null;
             card2Selected = null;
-
-            if (!isMatch) {
-                button1Selected.setText("");
-                button2Selected.setText("");
-                button1Selected.setEnabled(true);
-                button2Selected.setEnabled(true);
-            }
-
-            button1Selected = null;
-            button2Selected = null;
         }
+    }
+
+    public Card getCard(int row, int col){
+        return board.getCard(row, col);
     }
 
     public int getTotalCardsReversed() {

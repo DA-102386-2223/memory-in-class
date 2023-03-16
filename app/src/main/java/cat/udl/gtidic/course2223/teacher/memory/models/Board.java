@@ -90,7 +90,7 @@ public class Board {
         return true;
     }
 
-    public Card getPiece(int row, int column){
+    public Card getCard(int row, int column){
         return board[row][column];
     }
 }

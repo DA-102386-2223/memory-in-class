@@ -56,9 +56,9 @@ public class GameViewModel extends ViewModel {
     }
 
 //    TODO pending to remove view button here
-    public void cardClicked(View button, int row, int column){
+    public void cardClicked(int row, int column){
         Game myGame = game.getValue();
-        myGame.cardClicked((Button) button, row, column);
+        myGame.cardClickedMVVM(row, column);
         game.setValue(myGame);
 
 //        updating game
