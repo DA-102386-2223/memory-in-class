@@ -10,4 +10,5 @@
     <string name="points">Puntos:</string>
     <string name="CleanDB">Limpiar DB</string>
     <string name="ReadPoints">Dame info puntos</string>
+    <string name="login">Log in</string>
 </resources>

@@ -31,7 +31,7 @@ public class InitialSplashScreen extends AppCompatActivity {
     }
 
     private void endActivity(){
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();
     }
