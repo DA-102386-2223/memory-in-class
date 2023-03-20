@@ -11,4 +11,5 @@
     <string name="CleanDB">Netejar DB</string>
     <string name="ReadPoints">Dona\'m info punts</string>
     <string name="login">Log in</string>
+    <string name="logout">log out</string>
 </resources>

@@ -70,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
     private void reload(){
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
+            etPassword.setText("");
+            etEmail.setText("");
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }

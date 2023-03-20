@@ -9,6 +9,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import cat.udl.gtidic.course2223.teacher.memory.helpers.AppCompatActivityPlus;
 import cat.udl.gtidic.course2223.teacher.memory.R;
@@ -18,6 +22,8 @@ public class MainActivity extends AppCompatActivityPlus {
 
     // class property
     ActivityResultLauncher<Intent> someActivityResultLauncher;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,17 @@ public class MainActivity extends AppCompatActivityPlus {
 
         findViewById(R.id.clearButton).setOnClickListener(view -> clearDB());
         findViewById(R.id.readDBButton).setOnClickListener(view -> getPoints());
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        Toast.makeText(this, "Hola Usuari " + user.getUid(), Toast.LENGTH_SHORT).show();
+
+        findViewById(R.id.btLogout).setOnClickListener(v -> logout());
+    }
+
+    private void logout() {
+        mAuth.signOut();
+        finish();
     }
 
     private void clearDB() {
