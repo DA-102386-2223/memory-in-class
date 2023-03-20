@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "TEMP",
+    "project_id": "dam-TEMP",
+    "storage_bucket": "dam-TEMP.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:TEMP:android:TEMP",
+        "android_client_info": {
+          "package_name": "cat.udl.TEMP"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "TEMP-TEMP.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "TEMP"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "TEMP-TEMP.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
