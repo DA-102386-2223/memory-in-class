@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import cat.udl.gtidic.course2223.teacher.memory.R;
+import cat.udl.gtidic.course2223.teacher.memory.helpers.ActivityHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -47,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
+
+        ActivityHelper.hideKeyboard(this);
 
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
