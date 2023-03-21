@@ -10,6 +10,8 @@
     <string name="points">Punts:</string>
     <string name="CleanDB">Netejar DB</string>
     <string name="ReadPoints">Dona\'m info punts</string>
-    <string name="login">Log in</string>
-    <string name="logout">log out</string>
+    <string name="login">Log In</string>
+    <string name="logout">Log Out</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
 </resources>
