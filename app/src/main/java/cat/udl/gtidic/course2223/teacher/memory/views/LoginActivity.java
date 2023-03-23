@@ -34,8 +34,14 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmailLogin);
         etPassword = findViewById(R.id.etPasswordLogin);
         findViewById(R.id.btLogin).setOnClickListener(v -> login());
+        findViewById(R.id.btLoginToSignUp).setOnClickListener(v -> loginToSignUp());
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+    }
+
+    private void loginToSignUp() {
+        Intent i = new Intent(this, SignInActivity.class);
+        startActivity(i);
     }
 
     @Override
@@ -44,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         reload();
     }
+
 
     private void login() {
         String email = etEmail.getText().toString();
@@ -73,10 +80,15 @@ public class LoginActivity extends AppCompatActivity {
     private void reload(){
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
-            etPassword.setText("");
-            etEmail.setText("");
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
+            if (currentUser.isEmailVerified()){
+                etPassword.setText("");
+                etEmail.setText("");
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+            }else{
+                Toast.makeText(LoginActivity.this, R.string.VerifyEmail,
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

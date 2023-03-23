@@ -4,90 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.LoginActivity">
+    tools:context=".views.SignInActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineLoginLeft"
+        android:id="@+id/guidelineSignInLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="50dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineLoginRight"
+        android:id="@+id/guidelineSignInRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="50dp" />
 
     <EditText
-        android:id="@+id/etPasswordLogin"
+        android:id="@+id/etPasswordSignIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLoginRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLoginLeft"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailLogin" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineSignInRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineSignInLeft"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailSignIn" />
 
     <EditText
-        android:id="@+id/etEmailLogin"
+        android:id="@+id/etEmailSignIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLoginRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLoginLeft"
-        app:layout_constraintTop_toBottomOf="@+id/tvLoginTxt" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineSignInRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineSignInLeft"
+        app:layout_constraintTop_toBottomOf="@+id/tvSignInTxt" />
 
     <Button
-        android:id="@+id/btLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/memoryColorLight"
-        android:textColor="@color/black"
-        android:text="@string/login"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLoginRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLoginLeft"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />
-
-    <Button
-        android:id="@+id/btLoginToSignUp"
+        android:id="@+id/btSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/memoryColorLight"
         android:text="@string/Signup"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLoginRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLoginLeft"
-        app:layout_constraintTop_toBottomOf="@+id/btLogin" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineSignInRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineSignInLeft"
+        app:layout_constraintTop_toBottomOf="@+id/etPasswordSignIn" />
 
     <ImageView
-        android:id="@+id/ivImageLogin"
+        android:id="@+id/ivImageSignin"
         android:layout_width="194dp"
         android:layout_height="100dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLoginRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLoginLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineSignInRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineSignInLeft"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/m_411px" />
 
     <TextView
-        android:id="@+id/tvLoginTxt"
+        android:id="@+id/tvSignInTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/login"
+        android:text="@string/Signup"
         android:textAllCaps="true"
         android:textSize="34sp"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLoginRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLoginLeft"
-        app:layout_constraintTop_toBottomOf="@+id/ivImageLogin" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineSignInRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineSignInLeft"
+        app:layout_constraintTop_toBottomOf="@+id/ivImageSignin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

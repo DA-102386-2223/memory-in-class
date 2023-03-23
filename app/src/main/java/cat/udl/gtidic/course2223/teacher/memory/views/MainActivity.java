@@ -53,7 +53,10 @@ public class MainActivity extends AppCompatActivityPlus {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        Toast.makeText(this, "Hola Usuari " + user.getUid(), Toast.LENGTH_SHORT).show();
+        String name = user.getDisplayName();
+        String email = user.getEmail();
+        Uri photoUrl = user.getPhotoUrl();
+        Toast.makeText(this, "Hola Usuari " + user.getUid() + " " + email, Toast.LENGTH_SHORT).show();
 
         findViewById(R.id.btLogout).setOnClickListener(v -> logout());
     }
