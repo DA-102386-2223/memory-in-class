@@ -42,32 +42,32 @@ public class SignInActivity extends AppCompatActivityPlus {
 
         ActivityHelper.hideKeyboard(this);
 
-        if (email.equals("") || password.equals("")){
-            Toast.makeText(SignInActivity.this, "Email o password no valid",
-                    Toast.LENGTH_SHORT).show();
-        }else{
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(myClassTag, "createUserWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                user.sendEmailVerification();
-                                mAuth.signOut();
-                                Toast.makeText(SignInActivity.this, R.string.VerifyEmail,
-                                        Toast.LENGTH_SHORT).show();
-                                finish();
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(myClassTag, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(SignInActivity.this, "He tingut un problema enviant-te l'email, ho sento tio.",
-                                        Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        }
-                    });
+        if (email.trim().isEmpty() || password.trim().isEmpty()){
+            Toast.makeText(this, R.string.loginNoValidEmailPassword, Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(myClassTag, "createUserWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        user.sendEmailVerification();
+                        mAuth.signOut();
+                        Toast.makeText(SignInActivity.this, R.string.VerifyEmail,
+                                Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(myClassTag, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(SignInActivity.this, "He tingut un problema enviant-te l'email, ho sento tio.",
+                                Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+            });
     }
 }

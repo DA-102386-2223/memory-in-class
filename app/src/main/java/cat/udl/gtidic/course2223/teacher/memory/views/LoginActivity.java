@@ -58,6 +58,11 @@ public class LoginActivity extends AppCompatActivity {
 
         ActivityHelper.hideKeyboard(this);
 
+        if (email.trim().isEmpty() || password.trim().isEmpty()){
+            Toast.makeText(this, R.string.loginNoValidEmailPassword, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
