@@ -4,12 +4,17 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.room.Room;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import cat.udl.gtidic.course2223.teacher.memory.helpers.GlobalInfo;
 import cat.udl.gtidic.course2223.teacher.memory.models.Game.Game;
 import cat.udl.gtidic.course2223.teacher.memory.models.MemoryDatabase;
 
@@ -49,6 +54,15 @@ public class GameViewModel extends ViewModel {
         Game g = game.getValue();
         dbRoom.gameDAO().update(g);
         dbRoom.close();
+    }
+
+    public void sendMessage(EditText etMessage){
+        String missatge = etMessage.getText().toString();
+        etMessage.setText("");
+        String url = GlobalInfo.getIntance().getFIREBASE_DB();
+        FirebaseDatabase database = FirebaseDatabase.getInstance(url);
+        DatabaseReference myRef = database.getReference("message");
+        myRef.setValue(missatge);
     }
 
     public LiveData<Game> getGame(){
