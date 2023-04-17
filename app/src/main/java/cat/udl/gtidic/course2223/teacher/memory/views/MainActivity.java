@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivityPlus {
 
         findViewById(R.id.clearButton).setOnClickListener(view -> clearDB());
         findViewById(R.id.readDBButton).setOnClickListener(view -> getPoints());
+        findViewById(R.id.forumButton).setOnClickListener(view -> openForum());
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -59,6 +60,11 @@ public class MainActivity extends AppCompatActivityPlus {
         Toast.makeText(this, "Hola Usuari " + user.getUid() + " " + email, Toast.LENGTH_SHORT).show();
 
         findViewById(R.id.btLogout).setOnClickListener(v -> logout());
+    }
+
+    private void openForum() {
+        Intent i = new Intent(this, ForumActivity.class);
+        startActivity(i);
     }
 
     private void logout() {

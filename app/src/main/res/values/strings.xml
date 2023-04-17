@@ -17,4 +17,6 @@
     <string name="Signup">Sign up</string>
     <string name="VerifyEmail">Please, verify your email</string>
     <string name="loginNoValidEmailPassword">Email or Password not valid</string>
+    <string name="forum">Forum</string>
+    <string name="SendMessage">send a message</string>
 </resources>
