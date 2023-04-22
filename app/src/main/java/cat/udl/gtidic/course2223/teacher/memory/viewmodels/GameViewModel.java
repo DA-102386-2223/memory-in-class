@@ -2,8 +2,6 @@ package cat.udl.gtidic.course2223.teacher.memory.viewmodels;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.lifecycle.LiveData;
@@ -11,8 +9,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.room.Room;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import cat.udl.gtidic.course2223.teacher.memory.helpers.GlobalInfo;
 import cat.udl.gtidic.course2223.teacher.memory.models.Game.Game;
@@ -22,14 +25,38 @@ public class GameViewModel extends ViewModel {
 
     protected String myClassTag = this.getClass().getSimpleName();
 
-    private MutableLiveData<Game> game = new MutableLiveData<>();
+    private final MutableLiveData<Game> game = new MutableLiveData<>();
+    private final MutableLiveData<String> message = new MutableLiveData<>();
 
     private Context context;
+
+    private DatabaseReference myRef;
 
     public GameViewModel(){
         Game internalGame = new Game();
         internalGame.init();
         game.setValue(internalGame);
+    }
+
+    public void enableForum(){
+        String url = GlobalInfo.getIntance().getFIREBASE_DB();
+        FirebaseDatabase database = FirebaseDatabase.getInstance(url);
+        myRef = database.getReference("message");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                message.setValue(value);
+                Log.d(myClassTag, "Value is: " + value);
+            }
+            @Override
+            public void onCancelled(@NotNull DatabaseError error) { // Failed to read value
+                Log.w(myClassTag, "Failed to read value.", error.toException());
+            }
+        });
     }
 
     public void setContext(Context context){
@@ -59,9 +86,7 @@ public class GameViewModel extends ViewModel {
     public void sendMessage(EditText etMessage){
         String missatge = etMessage.getText().toString();
         etMessage.setText("");
-        String url = GlobalInfo.getIntance().getFIREBASE_DB();
-        FirebaseDatabase database = FirebaseDatabase.getInstance(url);
-        DatabaseReference myRef = database.getReference("message");
+
         myRef.setValue(missatge);
     }
 
@@ -79,4 +104,7 @@ public class GameViewModel extends ViewModel {
         updateGameInDB();
     }
 
+    public MutableLiveData<String> getMessage() {
+        return message;
+    }
 }

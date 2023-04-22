@@ -24,5 +24,6 @@ public class ForumActivity extends AppCompatActivity {
         binding.setGameViewModel(game);
         binding.setLifecycleOwner(this);
         game.setContext(this.getApplicationContext());
+        game.enableForum();
     }
 }
