@@ -17,6 +17,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import cat.udl.gtidic.course2223.teacher.memory.helpers.GlobalInfo;
 import cat.udl.gtidic.course2223.teacher.memory.models.Game.Game;
 import cat.udl.gtidic.course2223.teacher.memory.models.MemoryDatabase;
@@ -41,16 +46,26 @@ public class GameViewModel extends ViewModel {
     public void enableForum(){
         String url = GlobalInfo.getIntance().getFIREBASE_DB();
         FirebaseDatabase database = FirebaseDatabase.getInstance(url);
-        myRef = database.getReference("message");
+        myRef = database.getReference("forum-messages");
+        myRef.orderByChild("time");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                message.setValue(value);
-                Log.d(myClassTag, "Value is: " + value);
+                String output = "";
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    String line = childSnapshot.child("message").getValue(String.class);
+                    Date time = childSnapshot.child("time").getValue(Date.class);
+//                    android.text.format.DateFormat df = new android.text.format.DateFormat();
+//                    df.format("yyyy-MM-dd hh:mm:ss ", time);
+                    String dateFormatted = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(time);
+                    String finalLine = String.format("%s %s\n", dateFormatted, line);
+                    output = finalLine + output;
+                }
+                message.setValue(output);
+                Log.d(myClassTag, "Value is: " + output);
             }
             @Override
             public void onCancelled(@NotNull DatabaseError error) { // Failed to read value
@@ -87,7 +102,12 @@ public class GameViewModel extends ViewModel {
         String missatge = etMessage.getText().toString();
         etMessage.setText("");
 
-        myRef.setValue(missatge);
+        String key = myRef.push().getKey();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("time", new Date());
+        data.put("message", missatge);
+        myRef.child(key).setValue(data);
     }
 
     public LiveData<Game> getGame(){
