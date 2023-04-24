@@ -10,15 +10,15 @@ import java.util.Random;
 public class Board {
     protected String myClassTag = this.getClass().getSimpleName();
 
-    public Card[][] getBoard() {
+    public ArrayList<ArrayList<Card>> getBoard() {
         return board;
     }
 
-    public void setBoard(Card[][] board) {
+    public void setBoard(ArrayList<ArrayList<Card>> board) {
         this.board = board;
     }
 
-    Card[][] board;
+    ArrayList<ArrayList<Card>> board;
 
     public int getSize() {
         return size;
@@ -36,10 +36,12 @@ public class Board {
      */
     public Board(int size){
         this.size = size;
-        board = new Card[size][size];
+        board = new ArrayList<>(size);
         for (int i = 0; i<size; i++){
+            ArrayList<Card> line = new ArrayList<>(size);
+            board.add(line);
             for (int j = 0; j<size; j++){
-                board[i][j] = new Card();
+                line.add(new Card());
             }
         }
     }
@@ -53,7 +55,7 @@ public class Board {
         List<Card> pendingToAssign = new LinkedList<>();
         for (int i = 0; i<size; i++){
             for (int j = 0; j<size; j++){
-                pendingToAssign.add(board[i][j]);
+                pendingToAssign.add(board.get(i).get(j));
             }
         }
 
@@ -83,7 +85,7 @@ public class Board {
         for (int i = 0; i<size; i++){
             String line = "| ";
             for (int j = 0; j<size; j++){
-                line += board[i][j].getValue() + " | ";
+                line += board.get(i).get(j).getValue() + " | ";
             }
             Log.d(myClassTag, line);
         }
@@ -101,13 +103,13 @@ public class Board {
     public boolean isFull(){
         for (int i = 0; i<size; i++){
             for (int j = 0; j<size; j++){
-                if (!board[i][j].isAlreadyMatched()) return false;
+                if (!board.get(i).get(j).isAlreadyMatched()) return false;
             }
         }
         return true;
     }
 
     public Card getCard(int row, int column){
-        return board[row][column];
+        return board.get(row).get(column);
     }
 }
