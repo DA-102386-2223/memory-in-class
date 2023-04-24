@@ -36,7 +36,9 @@ public class Game {
     private Player winner = null;
 
     @Ignore
-    Card card1Selected;
+    int card1SelectedRow = -1;
+    @Ignore
+    int card1SelectedColumn = -1;
 
     @Ignore
     Card card2Selected;
@@ -57,6 +59,8 @@ public class Game {
         player1 = new HumanPlayer("Spiderman \uD83D\uDD77️");
         player2 = new HumanPlayer("Starlight ⚡️");
         currentPlayer = player1;
+
+        cleanCard1Selected();
     }
 
     /**
@@ -77,12 +81,12 @@ public class Game {
         p.setVisible(true);
 
         // assignant la piece clicada a la piece corresponent
-        if (card1Selected == null) card1Selected = p;
+        if (card1Selected() == null) setCard1Selected(row, column);
         else if (card2Selected == null) card2Selected = p;
         else Log.d(myClassTag, "Unexpected case, please check");
 
 //        logging current selected cards
-        if (card1Selected != null) Log.d(myClassTag, "Card 1: " + card1Selected.getValue());
+        if (card1Selected() != null) Log.d(myClassTag, "Card 1: " + card1Selected().getValue());
         else Log.d(myClassTag, "Card 1 not selected");
         if (card2Selected != null) Log.d(myClassTag, "Card 1: " + card2Selected.getValue());
         else Log.d(myClassTag, "Card 2 not selected");
@@ -90,18 +94,27 @@ public class Game {
         checkRoundEnded();
     }
 
+    private void setCard1Selected(int row, int column) {
+        card1SelectedColumn = column;
+        card1SelectedRow = row;
+    }
+
+    private Card card1Selected() {
+        return board.getCard(card1SelectedRow, card1SelectedColumn);
+    }
+
 
     /**
      * Revisa si en aquesta Round s'ha acabat i aplica les accions corresponents al canvi de ronda
      */
     private void checkRoundEnded() {
-        if (card1Selected != null && card2Selected != null) {
+        if (card1Selected() != null && card2Selected != null) {
             Log.d(myClassTag, "Fi de ronda");
 
             // TODO aquesta variable es innecessària quan els botons siguin MVVM
             boolean isMatch = false;
 
-            if (card1Selected.getValue().equals(card2Selected.getValue())){
+            if (card1Selected().getValue().equals(card2Selected.getValue())){
                 // revisa si match
                 isMatch = true;
                 setMatch();
@@ -136,7 +149,7 @@ public class Game {
      * Això farà que no siguin seleccionables
      */
     private void setCurrentPiecesAsMatched(){
-        card1Selected.setAlreadyMatched(true);
+        card1Selected().setAlreadyMatched(true);
         card2Selected.setAlreadyMatched(true);
     }
 
@@ -144,12 +157,18 @@ public class Game {
      * torna a inicialitzar la ronda de selecció de cartes
      */
     private void recoverRound(boolean isMatch){
-        if (card1Selected != null && card2Selected != null){
-            card1Selected.setVisible(false);
+        if (card1Selected() != null && card2Selected != null){
+            card1Selected().setVisible(false);
             card2Selected.setVisible(false);
-            card1Selected = null;
+//            card1Selected = null;
+            cleanCard1Selected();
             card2Selected = null;
         }
+    }
+
+    private void cleanCard1Selected() {
+        card1SelectedColumn = -1;
+        card1SelectedRow = -1;
     }
 
     public Card getCard(int row, int col){

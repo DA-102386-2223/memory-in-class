@@ -113,6 +113,7 @@ public class Board {
     }
 
     public Card getCard(int row, int column){
+        if (row < 0 || column < 0) return null;
         return board.get(row).get(column);
     }
 }
