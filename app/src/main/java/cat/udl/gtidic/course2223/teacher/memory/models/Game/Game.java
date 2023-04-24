@@ -163,4 +163,8 @@ public class Game {
     public Object getBoard() {
         return board;
     }
+
+    public void setBoard(Board b) {
+        this.board = b;
+    }
 }

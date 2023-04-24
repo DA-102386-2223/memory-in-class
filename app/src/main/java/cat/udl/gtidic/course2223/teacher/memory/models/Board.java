@@ -30,6 +30,9 @@ public class Board {
 
     int size;
 
+    public Board(){
+        ;
+    }
     /**
      * Init the Board with the size * size received
      * @param size rows and columns of the board

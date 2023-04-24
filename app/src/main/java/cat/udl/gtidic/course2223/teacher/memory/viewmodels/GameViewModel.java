@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cat.udl.gtidic.course2223.teacher.memory.helpers.GlobalInfo;
+import cat.udl.gtidic.course2223.teacher.memory.models.Board;
 import cat.udl.gtidic.course2223.teacher.memory.models.Game.Game;
 import cat.udl.gtidic.course2223.teacher.memory.models.MemoryDatabase;
 
@@ -44,12 +45,29 @@ public class GameViewModel extends ViewModel {
         game.setValue(internalGame);
 
         enableFirebaseDB();
+        updateFirebaseDB(internalGame);
     }
 
     private void enableFirebaseDB() {
         String url = GlobalInfo.getIntance().getFIREBASE_DB();
         FirebaseDatabase database = FirebaseDatabase.getInstance(url);
         myFirebaseDBRefence = database.getReference("multiplayer-board");
+
+        myFirebaseDBRefence.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                Board b = dataSnapshot.getValue(Board.class);
+                Game g = game.getValue();
+                g.setBoard(b);
+                game.setValue(g);
+            }
+            @Override
+            public void onCancelled(@NotNull DatabaseError error) { // Failed to read value
+                Log.w(myClassTag, "Failed to read value.", error.toException());
+            }
+        });
     }
 
     public void enableForum(){
