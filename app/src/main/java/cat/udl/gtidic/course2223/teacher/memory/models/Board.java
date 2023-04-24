@@ -10,7 +10,24 @@ import java.util.Random;
 public class Board {
     protected String myClassTag = this.getClass().getSimpleName();
 
+    public Card[][] getBoard() {
+        return board;
+    }
+
+    public void setBoard(Card[][] board) {
+        this.board = board;
+    }
+
     Card[][] board;
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     int size;
 
     /**

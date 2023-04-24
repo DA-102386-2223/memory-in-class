@@ -36,11 +36,20 @@ public class GameViewModel extends ViewModel {
     private Context context;
 
     private DatabaseReference myRef;
+    private DatabaseReference myFirebaseDBRefence;
 
     public GameViewModel(){
         Game internalGame = new Game();
         internalGame.init();
         game.setValue(internalGame);
+
+        enableFirebaseDB();
+    }
+
+    private void enableFirebaseDB() {
+        String url = GlobalInfo.getIntance().getFIREBASE_DB();
+        FirebaseDatabase database = FirebaseDatabase.getInstance(url);
+        myFirebaseDBRefence = database.getReference("multiplayer-board");
     }
 
     public void enableForum(){
@@ -122,6 +131,12 @@ public class GameViewModel extends ViewModel {
 
 //        updating game
         updateGameInDB();
+
+        updateFirebaseDB(myGame);
+    }
+
+    private void updateFirebaseDB(Game g) {
+        myFirebaseDBRefence.setValue(g.getBoard());
     }
 
     public MutableLiveData<String> getMessage() {

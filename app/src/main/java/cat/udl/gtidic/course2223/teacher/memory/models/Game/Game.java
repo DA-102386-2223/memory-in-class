@@ -159,4 +159,8 @@ public class Game {
     public int getTotalCardsReversed() {
         return totalCardsReversed;
     }
+
+    public Object getBoard() {
+        return board;
+    }
 }
