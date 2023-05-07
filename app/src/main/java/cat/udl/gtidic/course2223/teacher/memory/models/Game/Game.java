@@ -26,12 +26,22 @@ public class Game {
     protected int maxPoints = -1;
     protected int totalCardsReversed = 0;
 
+    public static final int MULTIPLAYER_STATUS_PENDING = 1;
+    public static final int MULTIPLAYER_STATUS_MATCHED = 2;
+    public static final int MULTIPLAYER_TYPE_CREATE = 1;
+    public static final int MULTIPLAYER_TYPE_CONNECT = 2;
+
+    public static final String MULTIPLAYER_KEY = "multiplayer-key";
+
     @Ignore
     private Player player1;
     @Ignore
     private Player player2;
     @Ignore
     private Player currentPlayer;
+    @Ignore
+    private Integer currentPlayerMultiplayer;
+
     @Ignore
     private Player winner = null;
 
@@ -68,8 +78,16 @@ public class Game {
      * Cal cridar-la només quan es compleixin les condicions per canviar de torn
      */
     private void changeTurn(){
+//        canviem el torn en local play
         currentPlayer = currentPlayer == player1 ? player2 : player1;
         Log.d(myClassTag, "He canviat de turn, ara li toca al jugador " + currentPlayer.getName());
+
+//        canviem el torn del multiplayer
+        if (currentPlayerMultiplayer != null){
+            if (currentPlayerMultiplayer == Game.MULTIPLAYER_TYPE_CONNECT) currentPlayerMultiplayer = Game.MULTIPLAYER_TYPE_CREATE;
+            else currentPlayerMultiplayer = Game.MULTIPLAYER_TYPE_CONNECT;
+            Log.d(myClassTag, "He canviat de turn en multiplayer");
+        }
     }
 
     public Player getCurrentPlayer(){ return currentPlayer; }
@@ -185,5 +203,13 @@ public class Game {
 
     public void setBoard(Board b) {
         this.board = b;
+    }
+
+    public void setCurrentPlayerMultiplayer(Integer turn){
+        this.currentPlayerMultiplayer = turn;
+    }
+
+    public Integer getCurrentPlayerMultiplayer() {
+        return currentPlayerMultiplayer;
     }
 }

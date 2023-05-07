@@ -37,30 +37,56 @@ public class GameViewModel extends ViewModel {
     private Context context;
 
     private DatabaseReference myRef;
-    private DatabaseReference myFirebaseDBRefence;
+    private DatabaseReference myFirebaseDBReference;
+
+    private Integer myMultiplayerPlayerType;
 
     public GameViewModel(){
         Game internalGame = new Game();
         internalGame.init();
         game.setValue(internalGame);
-
-        enableFirebaseDB();
-        updateFirebaseDB(internalGame);
     }
 
-    private void enableFirebaseDB() {
-        String url = GlobalInfo.getIntance().getFIREBASE_DB();
-        FirebaseDatabase database = FirebaseDatabase.getInstance(url);
-        myFirebaseDBRefence = database.getReference("multiplayer-board");
+    /**
+     * deprecated, mirar v2
+     */
+//    private void enableFirebaseDB() {
+//        String url = GlobalInfo.getIntance().getFIREBASE_DB();
+//        FirebaseDatabase database = FirebaseDatabase.getInstance(url);
+//        myFirebaseDBRefence = database.getReference("multiplayer-board");
+//
+//        myFirebaseDBRefence.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                Board b = dataSnapshot.getValue(Board.class);
+//                Game g = game.getValue();
+//                g.setBoard(b);
+//                game.setValue(g);
+//            }
+//            @Override
+//            public void onCancelled(@NotNull DatabaseError error) { // Failed to read value
+//                Log.w(myClassTag, "Failed to read value.", error.toException());
+//            }
+//        });
+//    }
 
-        myFirebaseDBRefence.addValueEventListener(new ValueEventListener() {
+
+    /**
+     * activa els avisos de canvi a firebase per actualitzar el joc quan l'oponent tiri
+     */
+    private void enableFirebaseDBv2() {
+        myFirebaseDBReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                Board b = dataSnapshot.getValue(Board.class);
+                Board b = dataSnapshot.child("board").getValue(Board.class);
+                Integer multiplayerTurn = dataSnapshot.child("turn").getValue(Integer.class);
                 Game g = game.getValue();
                 g.setBoard(b);
+                g.setCurrentPlayerMultiplayer(multiplayerTurn);
                 game.setValue(g);
             }
             @Override
@@ -68,6 +94,30 @@ public class GameViewModel extends ViewModel {
                 Log.w(myClassTag, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    /**
+     * Crea un game a firebase perquè es connecti algun altre player i l'inicialitza
+     */
+    public void multiplayerCreate() {
+        String url = GlobalInfo.getIntance().getFIREBASE_DB();
+        FirebaseDatabase database = FirebaseDatabase.getInstance(url);
+        DatabaseReference myFirebaseDBGames = database.getReference("games");
+        String key = myFirebaseDBGames.push().getKey();
+        myFirebaseDBReference = myFirebaseDBGames.child(key);
+        this.myMultiplayerPlayerType = Game.MULTIPLAYER_TYPE_CREATE;
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("time", new Date());
+        data.put("status", Game.MULTIPLAYER_STATUS_PENDING);
+        data.put("board", null);
+        data.put("turn", myMultiplayerPlayerType);
+        myFirebaseDBReference.setValue(data);
+
+        game.getValue().setCurrentPlayerMultiplayer(myMultiplayerPlayerType);
+
+        enableFirebaseDBv2();
+        updateFirebaseDBv2();
     }
 
     public void enableForum(){
@@ -144,17 +194,39 @@ public class GameViewModel extends ViewModel {
 //    TODO pending to remove view button here
     public void cardClicked(int row, int column){
         Game myGame = game.getValue();
+
+//      in multiplayer: checking if my turn or not
+        if (myMultiplayerPlayerType != null){
+            if (!myGame.getCurrentPlayerMultiplayer().equals(myMultiplayerPlayerType) ) return;
+        }
+
         myGame.cardClickedMVVM(row, column);
         game.setValue(myGame);
 
 //        updating game
         updateGameInDB();
 
-        updateFirebaseDB(myGame);
+        updateFirebaseDBv2();
     }
 
+    /**
+     * Deprecated check v2
+     * @param g
     private void updateFirebaseDB(Game g) {
-        myFirebaseDBRefence.setValue(g.getBoard());
+        myFirebaseDBReference.setValue(g.getBoard());
+    }
+     */
+
+    /**
+     * Si es un joc multiplayer, actualitza el board i el turn
+     */
+    private void updateFirebaseDBv2() {
+        if (myFirebaseDBReference != null){
+            Game g = game.getValue();
+            myFirebaseDBReference.child("board").setValue(g.getBoard());
+            myFirebaseDBReference.child("turn").setValue(g.getCurrentPlayerMultiplayer());
+        }
+
     }
 
     public MutableLiveData<String> getMessage() {

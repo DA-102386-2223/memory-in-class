@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import cat.udl.gtidic.course2223.teacher.memory.helpers.AppCompatActivityPlus;
 import cat.udl.gtidic.course2223.teacher.memory.R;
+import cat.udl.gtidic.course2223.teacher.memory.models.Game.Game;
 import cat.udl.gtidic.course2223.teacher.memory.models.MemoryDatabase;
 
 public class MainActivity extends AppCompatActivityPlus {
@@ -47,10 +48,13 @@ public class MainActivity extends AppCompatActivityPlus {
 //          playWithResult();
             playInitial();
         });
+        findViewById(R.id.btnMPStart).setOnClickListener(view -> playMultiplayerCreate());
+        findViewById(R.id.btnMPConnect).setOnClickListener(view -> playMultiplayerConnect());
 
         findViewById(R.id.clearButton).setOnClickListener(view -> clearDB());
         findViewById(R.id.readDBButton).setOnClickListener(view -> getPoints());
         findViewById(R.id.forumButton).setOnClickListener(view -> openForum());
+
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -114,6 +118,18 @@ public class MainActivity extends AppCompatActivityPlus {
     /** Open the new activity game v3 */
     private void playInitial(){
         Intent i = new Intent(this, GameActivity.class);
+        startActivity(i);
+    }
+
+    private void playMultiplayerCreate(){
+        Intent i = new Intent(this, GameActivity.class);
+        i.putExtra(Game.MULTIPLAYER_KEY, Game.MULTIPLAYER_TYPE_CREATE);
+        startActivity(i);
+    }
+
+    private void playMultiplayerConnect(){
+        Intent i = new Intent(this, GameActivity.class);
+        i.putExtra(Game.MULTIPLAYER_KEY, Game.MULTIPLAYER_TYPE_CONNECT);
         startActivity(i);
     }
 

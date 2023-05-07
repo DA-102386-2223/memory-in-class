@@ -9,7 +9,7 @@
     <string name="currentPlayer">Jugador actual:</string>
     <string name="points">Puntos:</string>
     <string name="CleanDB">Limpiar DB</string>
-    <string name="ReadPoints">Dame info puntos</string>
+    <string name="ReadPoints">Info puntos</string>
     <string name="login">Log In</string>
     <string name="logout">Log Out</string>
     <string name="email">email</string>
@@ -19,4 +19,6 @@
     <string name="loginNoValidEmailPassword">Email o Password no válidos</string>
     <string name="forum">Forum</string>
     <string name="SendMessage">send a message</string>
+    <string name="MPStart">MP Iniciar</string>
+    <string name="MPConnect">MP Connectar</string>
 </resources>
