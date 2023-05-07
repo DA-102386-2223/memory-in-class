@@ -44,7 +44,7 @@ public class GameActivity extends AppCompatActivityPlus {
         if (extra != null){
             int multiplayerType = extra.getInt(Game.MULTIPLAYER_KEY);
             if (multiplayerType == Game.MULTIPLAYER_TYPE_CREATE) game.multiplayerCreate();
-//            if (multiplayerType == Game.MULTIPLAYER_TYPE_LINK) // TODO Connect to FirebaseGame
+            if (multiplayerType == Game.MULTIPLAYER_TYPE_CONNECT) game.multiplayerConnect(extra.getString(Game.MULTIPLAYER_GAME_KEY));
         }
 
         findViewById(R.id.finishButon).setOnClickListener(view -> {

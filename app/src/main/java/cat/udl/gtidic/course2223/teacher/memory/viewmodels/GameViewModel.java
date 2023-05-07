@@ -100,9 +100,7 @@ public class GameViewModel extends ViewModel {
      * Crea un game a firebase perquè es connecti algun altre player i l'inicialitza
      */
     public void multiplayerCreate() {
-        String url = GlobalInfo.getIntance().getFIREBASE_DB();
-        FirebaseDatabase database = FirebaseDatabase.getInstance(url);
-        DatabaseReference myFirebaseDBGames = database.getReference("games");
+        DatabaseReference myFirebaseDBGames = GlobalInfo.getIntance().getFirebaseGames();
         String key = myFirebaseDBGames.push().getKey();
         myFirebaseDBReference = myFirebaseDBGames.child(key);
         this.myMultiplayerPlayerType = Game.MULTIPLAYER_TYPE_CREATE;
@@ -118,6 +116,23 @@ public class GameViewModel extends ViewModel {
 
         enableFirebaseDBv2();
         updateFirebaseDBv2();
+    }
+
+    /**
+     * Connecta amb un game de firebase el bloqueja com a ja matchat i comença el joc
+     */
+    public void multiplayerConnect(String gameKey) {
+        DatabaseReference games = GlobalInfo.getIntance().getFirebaseGames();
+
+//        setting my config
+        myMultiplayerPlayerType = Game.MULTIPLAYER_TYPE_CONNECT;
+        myFirebaseDBReference = games.child(gameKey);
+
+        myFirebaseDBReference.child("status").setValue(Game.MULTIPLAYER_STATUS_MATCHED);
+        // TODO millora: idealment hauriem d'agafar el turn del Firebase
+        game.getValue().setCurrentPlayerMultiplayer(Game.MULTIPLAYER_TYPE_CREATE);
+
+        enableFirebaseDBv2();
     }
 
     public void enableForum(){

@@ -128,8 +128,7 @@ public class MainActivity extends AppCompatActivityPlus {
     }
 
     private void playMultiplayerConnect(){
-        Intent i = new Intent(this, GameActivity.class);
-        i.putExtra(Game.MULTIPLAYER_KEY, Game.MULTIPLAYER_TYPE_CONNECT);
+        Intent i = new Intent(this, MultiplayerGameSelector.class);
         startActivity(i);
     }
 

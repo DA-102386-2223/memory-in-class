@@ -1,5 +1,8 @@
 package cat.udl.gtidic.course2223.teacher.memory.helpers;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class GlobalInfo {
     private final int SPLASH_SCREEN_TIMEOUT = 500;
     private final String FIREBASE_DB = "https://dam-memory-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -20,5 +23,11 @@ public class GlobalInfo {
 
     public String getFIREBASE_DB() {
         return FIREBASE_DB;
+    }
+
+    public DatabaseReference getFirebaseGames(){
+        String url = this.getFIREBASE_DB();
+        FirebaseDatabase database = FirebaseDatabase.getInstance(url);
+        return database.getReference("games");
     }
 }
