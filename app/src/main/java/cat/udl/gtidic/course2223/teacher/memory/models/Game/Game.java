@@ -130,12 +130,8 @@ public class Game {
         if (card1Selected() != null && card2Selected != null) {
             Log.d(myClassTag, "Fi de ronda");
 
-            // TODO aquesta variable es innecessària quan els botons siguin MVVM
-            boolean isMatch = false;
-
             if (card1Selected().getValue().equals(card2Selected.getValue())){
                 // revisa si match
-                isMatch = true;
                 setMatch();
 
                 // check winner
@@ -150,7 +146,7 @@ public class Game {
                 changeTurn();
             }
 
-            recoverRound(isMatch);
+            recoverRound();
         }
     }
 
@@ -175,7 +171,7 @@ public class Game {
     /**
      * torna a inicialitzar la ronda de selecció de cartes
      */
-    private void recoverRound(boolean isMatch){
+    private void recoverRound(){
         if (card1Selected() != null && card2Selected != null){
             card1Selected().setVisible(false);
             card2Selected.setVisible(false);
