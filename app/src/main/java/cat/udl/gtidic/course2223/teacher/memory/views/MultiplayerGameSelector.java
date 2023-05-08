@@ -16,6 +16,8 @@ import com.google.firebase.database.ValueEventListener;
 import cat.udl.gtidic.course2223.teacher.memory.R;
 import cat.udl.gtidic.course2223.teacher.memory.helpers.AppCompatActivityPlus;
 import cat.udl.gtidic.course2223.teacher.memory.helpers.GlobalInfo;
+import cat.udl.gtidic.course2223.teacher.memory.helpers.adapters.MultiplayerMatchesAdapter;
+import cat.udl.gtidic.course2223.teacher.memory.helpers.providers.MultiplayerMatchesProvider;
 import cat.udl.gtidic.course2223.teacher.memory.models.Game.Game;
 
 public class MultiplayerGameSelector extends AppCompatActivityPlus {
@@ -25,7 +27,14 @@ public class MultiplayerGameSelector extends AppCompatActivityPlus {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiplayer_game_selector);
         
-        getFirstGameAvailable();
+//        getFirstGameAvailable();
+        initRecylerView();
+    }
+
+    private void initRecylerView() {
+        MultiplayerMatchesProvider provider = new MultiplayerMatchesProvider();
+        MultiplayerMatchesAdapter adapter =  new MultiplayerMatchesAdapter(provider.getLaMevaLlista());
+//        pending things to do
     }
 
     /**
