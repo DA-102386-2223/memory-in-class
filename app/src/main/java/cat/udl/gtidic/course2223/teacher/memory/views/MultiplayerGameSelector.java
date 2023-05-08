@@ -1,6 +1,8 @@
 package cat.udl.gtidic.course2223.teacher.memory.views;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,6 +36,10 @@ public class MultiplayerGameSelector extends AppCompatActivityPlus {
     private void initRecylerView() {
         MultiplayerMatchesProvider provider = new MultiplayerMatchesProvider();
         MultiplayerMatchesAdapter adapter =  new MultiplayerMatchesAdapter(provider.getLaMevaLlista());
+        RecyclerView rv = findViewById(R.id.rv_matches);
+        LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv.setLayoutManager(llm);
+        rv.setAdapter(adapter);
 //        pending things to do
     }
 

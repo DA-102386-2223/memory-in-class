@@ -23,4 +23,5 @@
     <string name="MPConnect">MP Connectar</string>
     <string name="NoGamesAvailable">No hay juegos disponibles</string>
     <string name="MatchesList">Available matches</string>
+    <string name="user">Usuarios:</string>
 </resources>
