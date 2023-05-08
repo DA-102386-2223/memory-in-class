@@ -22,4 +22,5 @@
     <string name="MPStart">MP Iniciar</string>
     <string name="MPConnect">MP Connectar</string>
     <string name="NoGamesAvailable">No hi ha jocs disponibles</string>
+    <string name="MatchesList">Available matches</string>
 </resources>
