@@ -36,6 +36,9 @@ public class MultiplayerGameSelector extends AppCompatActivityPlus {
     private void initRecylerView() {
         MultiplayerMatchesProvider provider = new MultiplayerMatchesProvider();
         MultiplayerMatchesAdapter adapter =  new MultiplayerMatchesAdapter(provider.getLaMevaLlista());
+        provider.setAdapter(adapter);
+        provider.getFromFirebase();
+
         RecyclerView rv = findViewById(R.id.rv_matches);
         LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(llm);
