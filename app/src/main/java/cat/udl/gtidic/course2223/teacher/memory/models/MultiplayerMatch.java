@@ -1,14 +1,25 @@
 package cat.udl.gtidic.course2223.teacher.memory.models;
 
 public class MultiplayerMatch {
-    public String getUserCreator() {
-        return userCreator;
+    public String getUserName() {
+        return userName;
     }
 
-    String userCreator;
-    int status = 1;
+    public String getUserEmail() {
+        return userEmail;
+    }
 
-    public MultiplayerMatch(String user){
-        this.userCreator = user;
+    public String getMatchKey() {
+        return matchKey;
+    }
+
+    String userName;
+    String userEmail;
+    String matchKey;
+
+    public MultiplayerMatch(String matchKey, String userName, String userEmail){
+        this.matchKey = matchKey;
+        this.userName = userName;
+        this.userEmail = userEmail;
     }
 }

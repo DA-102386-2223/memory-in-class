@@ -9,6 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.room.Room;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -105,11 +107,18 @@ public class GameViewModel extends ViewModel {
         myFirebaseDBReference = myFirebaseDBGames.child(key);
         this.myMultiplayerPlayerType = Game.MULTIPLAYER_TYPE_CREATE;
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String name = user.getDisplayName();
+        String email = user.getEmail();
+
         Map<String, Object> data = new HashMap<>();
         data.put("time", new Date());
         data.put("status", Game.MULTIPLAYER_STATUS_PENDING);
         data.put("board", null);
         data.put("turn", myMultiplayerPlayerType);
+        data.put("userName", name);
+        data.put("userEmail", email);
         myFirebaseDBReference.setValue(data);
 
         game.getValue().setCurrentPlayerMultiplayer(myMultiplayerPlayerType);

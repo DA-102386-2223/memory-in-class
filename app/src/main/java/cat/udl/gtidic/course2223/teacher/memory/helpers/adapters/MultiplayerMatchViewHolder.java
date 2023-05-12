@@ -16,17 +16,21 @@ import cat.udl.gtidic.course2223.teacher.memory.views.GameActivity;
 class MultiplayerMatchViewHolder extends RecyclerView.ViewHolder{
 
     View itemView;
-    TextView username;
+    TextView userName;
+    TextView userEmail;
+    TextView matchKey;
     public MultiplayerMatchViewHolder(@NonNull View itemView) {
         super(itemView);
         this.itemView = itemView;
-        this.username = itemView.findViewById(R.id.rv_item_username);
+        this.userName = itemView.findViewById(R.id.rv_item_username);
+        this.userEmail = itemView.findViewById(R.id.rv_item_useremail);
+        this.matchKey = itemView.findViewById(R.id.rv_item_matchkey);
         itemView.findViewById(R.id.item_rv).setOnClickListener(v -> jumpToGame());
     }
 
     private void jumpToGame() {
 
-        String firebaseKey = username.getText().toString();
+        String firebaseKey = userName.getText().toString();
 
         Activity fake = (Activity)itemView.getContext();
         Intent i = new Intent(fake, GameActivity.class);
@@ -38,6 +42,8 @@ class MultiplayerMatchViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void render(MultiplayerMatch mm) {
-        username.setText(mm.getUserCreator());
+        userName.setText(mm.getUserName());
+        userEmail.setText(mm.getUserEmail());
+        matchKey.setText(mm.getMatchKey());
     }
 }

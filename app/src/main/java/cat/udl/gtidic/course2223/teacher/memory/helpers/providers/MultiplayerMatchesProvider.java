@@ -1,7 +1,6 @@
 package cat.udl.gtidic.course2223.teacher.memory.helpers.providers;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -14,7 +13,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import cat.udl.gtidic.course2223.teacher.memory.R;
 import cat.udl.gtidic.course2223.teacher.memory.helpers.GlobalInfo;
 import cat.udl.gtidic.course2223.teacher.memory.helpers.adapters.MultiplayerMatchesAdapter;
 import cat.udl.gtidic.course2223.teacher.memory.models.Game.Game;
@@ -30,7 +28,7 @@ public class MultiplayerMatchesProvider {
     List<MultiplayerMatch> laMevaLlista = new ArrayList<>();
 
     public MultiplayerMatchesProvider(){
-        laMevaLlista.add(new MultiplayerMatch("albert"));
+        laMevaLlista.add(new MultiplayerMatch("-asdfasdfas", "Albert", "albert@albert.cat"));
     }
 
     public void getFromFirebase(){
@@ -53,7 +51,9 @@ public class MultiplayerMatchesProvider {
         laMevaLlista.clear();
         for (DataSnapshot gameSelected : snapshot.getChildren()){
             String key = gameSelected.getKey();
-            MultiplayerMatch mm = new MultiplayerMatch(key);
+            String userName = gameSelected.child("userName").getValue(String.class);
+            String userEmail = gameSelected.child("userEmail").getValue(String.class);
+            MultiplayerMatch mm = new MultiplayerMatch(key, userName, userEmail);
             laMevaLlista.add(mm);
         }
         adapter.notifyItemRangeChanged(0, laMevaLlista.size());

@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="memoryColor">#976436</color>
     <color name="memoryColorLight">#cbaf96</color>
+    <color name="memoryColorMesLight">#EFD7C2</color>
 </resources>
