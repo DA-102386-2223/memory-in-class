@@ -34,7 +34,7 @@ public class MultiplayerMatchesProvider {
     public void getFromFirebase(){
         DatabaseReference myFirebaseDBGames = GlobalInfo.getIntance().getFirebaseGames();
         Query q = myFirebaseDBGames.orderByChild("status").equalTo(Game.MULTIPLAYER_STATUS_PENDING);
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
+        q.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 refreshData(snapshot);

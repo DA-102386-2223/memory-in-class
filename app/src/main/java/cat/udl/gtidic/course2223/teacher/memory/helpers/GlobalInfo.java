@@ -28,6 +28,6 @@ public class GlobalInfo {
     public DatabaseReference getFirebaseGames(){
         String url = this.getFIREBASE_DB();
         FirebaseDatabase database = FirebaseDatabase.getInstance(url);
-        return database.getReference("games");
+        return database.getReference("matches");
     }
 }
