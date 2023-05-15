@@ -25,6 +25,9 @@ public class MultiplayerMatchesProvider {
         return laMevaLlista;
     }
 
+    private ValueEventListener listener;
+    private DatabaseReference myFirebaseDBGames;
+
     List<MultiplayerMatch> laMevaLlista = new ArrayList<>();
 
     public MultiplayerMatchesProvider(){
@@ -32,9 +35,9 @@ public class MultiplayerMatchesProvider {
     }
 
     public void getFromFirebase(){
-        DatabaseReference myFirebaseDBGames = GlobalInfo.getIntance().getFirebaseGames();
+        myFirebaseDBGames = GlobalInfo.getIntance().getFirebaseGames();
         Query q = myFirebaseDBGames.orderByChild("status").equalTo(Game.MULTIPLAYER_STATUS_PENDING);
-        q.addValueEventListener(new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 refreshData(snapshot);
@@ -44,7 +47,8 @@ public class MultiplayerMatchesProvider {
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d("Provider", "Problemes de connexio");
             }
-        });
+        };
+        q.addValueEventListener(listener);
     }
 
     private void refreshData(DataSnapshot snapshot){
@@ -61,5 +65,9 @@ public class MultiplayerMatchesProvider {
 
     public void setAdapter(MultiplayerMatchesAdapter adapter) {
         this.adapter = adapter;
+    }
+
+    public void detach() {
+        myFirebaseDBGames.removeEventListener(listener);
     }
 }
